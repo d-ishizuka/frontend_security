@@ -14,6 +14,11 @@
     const url = new URL(location.href);
     const message = url.searchParams.get("message");
     if (message !== null) {
-        document.querySelector("#result").innerHTML = message;
+        document.querySelector("#result").textContent = message;
+    }
+    const urlStr = url.searchParams.get("url");
+    if (urlStr !== null) {
+        const linkUrl = new URL(urlStr, url.origin);
+        document.querySelector("#link").href = linkUrl;
     }
 </script>

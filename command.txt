@@ -2,4 +2,5 @@
 await fetch("http://site.example:3000/api",{headers:{"X-Token":"aBcDeF1234567890"}});
 
 # XSSリンク
-http://localhost:3000/xss.html?message=%3Cimg%20src%20onerror=alert(%27xss%27)%3E
+http://localhost:3000/xss.html?message=<img%20src%20onerror=alert('xss')>
+http://localhost:3000/xss.html?url=https://example.com
