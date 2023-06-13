@@ -1,5 +1,6 @@
 const express = require('express');
 const api = require('./routes/api');
+const crypto = require('crypto');
 const app = express();
 const port = 3000;
 
@@ -9,8 +10,9 @@ app.use('/api', api);
 
 app.get('/', (req, res) => res.send('Top Page!'));
 app.get("/csp", (req, res) => {
-  res.header("Content-Security-Policy", "script-src 'self'");
-  res.render("csp")
+  const nonceValue = crypto.randomBytes(16).toString("base64");
+  res.header("Content-Security-Policy", `script-src 'nonce-${nonceValue}'`);
+  res.render("csp", {nonce: nonceValue})
 });
 
 app.listen(port, () => {
